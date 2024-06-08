@@ -64,7 +64,29 @@ function App() {
         <h4> {글제목[2]} </h4>
         <p2>2월 17일 발행</p2>
       </div>
-      <h4></h4>
+      <Modal />
+      <인적사항 />
+    </div>
+  );
+}
+
+//바깥에 만드셈
+function Modal() {
+  return (
+    <div className="modal">
+      <h4>제목</h4>
+      <p>날짜</p>
+      <p>상세내용</p>
+    </div>
+  );
+}
+
+function 인적사항() {
+  return (
+    <div className="list">
+      <h3>이름 : </h3>
+      <p> 나이 : </p>
+      <p> 직업 : </p>
     </div>
   );
 }
