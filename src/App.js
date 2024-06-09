@@ -9,6 +9,7 @@ function App() {
     "강남 우동맛집",
     "파이썬 독학",
   ]);
+  let [title, setTitle] = useState(2);
 
   let [따봉, 따봉변경] = useState([0, 0, 0]);
 
@@ -76,8 +77,13 @@ function App() {
       </div> */}
       {글제목.map(function (a, i) {
         return (
-          <div className="list" key="i">
-            <h4 onClick={() => setModal(!modal)}>
+          <div className="list" key={i}>
+            <h4
+              onClick={() => {
+                setModal(!modal);
+                setTitle(i);
+              }}
+            >
               {글제목[i]}
               <span
                 onClick={() => {
@@ -91,14 +97,22 @@ function App() {
               {따봉[i]}
               {/* 좋아요. 여기가 카운트 보여지는곳. 각 카운트를 센다. useState */}
             </h4>
-            <p2>2월 17일 발행</p2>ㅌ
+            <p2>2월 17일 발행</p2>
           </div>
         );
       })}
+      <button onClick={() => setTitle(0)}> 글제목0</button>
+      <button onClick={() => setTitle(1)}> 글제목1</button>
+      <button onClick={() => setTitle(2)}> 글제목2</button>
       {
         // 조건식 ? 참일때 실행할코드 : 거짓일 때 실행할 코드
         modal == true ? (
-          <Modal Change={Change} color={"yellow"} 글제목={글제목} />
+          <Modal
+            title={title}
+            Change={Change}
+            color={"yellow"}
+            글제목={글제목}
+          />
         ) : null
       }
     </div>
@@ -109,7 +123,7 @@ function App() {
 function Modal(props) {
   return (
     <div className="modal" style={{ background: props.color }}>
-      <h4>{props.글제목[0]}</h4>
+      <h4>{props.글제목[props.title]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
       <button
