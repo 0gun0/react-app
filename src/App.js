@@ -12,6 +12,9 @@ function App() {
 
   let [따봉, 따봉변경] = useState(0);
 
+  let [modal, setModal] = useState(false);
+  let [unmodal, setUnModal] = useState(true);
+
   function 함수() {
     console.log(1);
   }
@@ -61,11 +64,20 @@ function App() {
         <p2>2월 17일 발행</p2>
       </div>
       <div className="list">
-        <h4> {글제목[2]} </h4>
+        <h4
+          onClick={() => {
+            setModal(!modal);
+          }}
+        >
+          {" "}
+          {글제목[2]}{" "}
+        </h4>
         <p2>2월 17일 발행</p2>
       </div>
-      <Modal />
-      <인적사항 />
+      {
+        // 조건식 ? 참일때 실행할코드 : 거짓일 때 실행할 코드
+        modal == true ? <Modal /> : null
+      }
     </div>
   );
 }
