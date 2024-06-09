@@ -4,7 +4,7 @@ import { useState } from "react";
 
 function App() {
   let post = "강남 우동 맛집";
-  let [글제목, x] = useState([
+  let [글제목, Change] = useState([
     "남자 코트 추천",
     "강남 우동맛집",
     "파이썬 독학",
@@ -28,7 +28,7 @@ function App() {
         onClick={() => {
           let copy = [...글제목];
           copy.sort();
-          x(copy);
+          Change(copy);
         }}
       >
         {" "}
@@ -77,8 +77,7 @@ function App() {
       {글제목.map(function (a, i) {
         return (
           <div className="list" key="i">
-            <h4>
-              {" "}
+            <h4 onClick={() => setModal(!modal)}>
               {글제목[i]}
               <span
                 onClick={() => {
@@ -90,37 +89,36 @@ function App() {
                 좋아요👍
               </span>{" "}
               {따봉[i]}
-              {/* 여기가 카운트 되는곳 */}
+              {/* 좋아요. 여기가 카운트 보여지는곳. 각 카운트를 센다. useState */}
             </h4>
-            <p2>2월 17일 발행</p2>
+            <p2>2월 17일 발행</p2>ㅌ
           </div>
         );
       })}
       {
         // 조건식 ? 참일때 실행할코드 : 거짓일 때 실행할 코드
-        modal == true ? <Modal /> : null
+        modal == true ? (
+          <Modal Change={Change} color={"yellow"} 글제목={글제목} />
+        ) : null
       }
     </div>
   );
 }
 
 //바깥에 만드셈
-function Modal() {
+function Modal(props) {
   return (
-    <div className="modal">
-      <h4>제목</h4>
+    <div className="modal" style={{ background: props.color }}>
+      <h4>{props.글제목[0]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
-    </div>
-  );
-}
-
-function 인적사항() {
-  return (
-    <div className="list">
-      <h3>이름 : </h3>
-      <p> 나이 : </p>
-      <p> 직업 : </p>
+      <button
+        onClick={() => {
+          props.Change(["여자코트 추천", "강남 우동맛집", "파이썬독학"]);
+        }}
+      >
+        글수정
+      </button>
     </div>
   );
 }
