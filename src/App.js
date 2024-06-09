@@ -10,7 +10,7 @@ function App() {
     "파이썬 독학",
   ]);
 
-  let [따봉, 따봉변경] = useState(0);
+  let [따봉, 따봉변경] = useState([0, 0, 0]);
 
   let [modal, setModal] = useState(false);
   let [unmodal, setUnModal] = useState(true);
@@ -35,7 +35,7 @@ function App() {
         가나다순 정렬
       </button>{" "}
       {/* 버튼 누르면 글제목 가나다순 정렬기능 만들기 array 정렬? */}
-      <div className="list">
+      {/* <div className="list">
         <h4>
           {" "}
           {글제목[0]}
@@ -73,7 +73,29 @@ function App() {
           {글제목[2]}{" "}
         </h4>
         <p2>2월 17일 발행</p2>
-      </div>
+      </div> */}
+      {글제목.map(function (a, i) {
+        return (
+          <div className="list" key="i">
+            <h4>
+              {" "}
+              {글제목[i]}
+              <span
+                onClick={() => {
+                  let copy = [...따봉];
+                  copy[i] = copy[i] + 1;
+                  따봉변경(copy);
+                }}
+              >
+                좋아요👍
+              </span>{" "}
+              {따봉[i]}
+              {/* 여기가 카운트 되는곳 */}
+            </h4>
+            <p2>2월 17일 발행</p2>
+          </div>
+        );
+      })}
       {
         // 조건식 ? 참일때 실행할코드 : 거짓일 때 실행할 코드
         modal == true ? <Modal /> : null
