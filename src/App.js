@@ -10,11 +10,11 @@ function App() {
     "파이썬 독학",
   ]);
   let [title, setTitle] = useState(2);
+  let [입력값, 입력값변경] = useState("");
 
   let [따봉, 따봉변경] = useState([0, 0, 0]);
 
   let [modal, setModal] = useState(false);
-  let [unmodal, setUnModal] = useState(true);
 
   function 함수() {
     console.log(1);
@@ -98,12 +98,37 @@ function App() {
               {/* 좋아요. 여기가 카운트 보여지는곳. 각 카운트를 센다. useState */}
             </h4>
             <p2>2월 17일 발행</p2>
+            <button
+              onClick={() => {
+                let copy = [...글제목];
+                copy.splice(i, 1);
+                Change(copy);
+              }}
+            >
+              {" "}
+              삭제{" "}
+            </button>
           </div>
         );
       })}
-      <button onClick={() => setTitle(0)}> 글제목0</button>
+      {/* <button onClick={() => setTitle(0)}> 글제목0</button>
       <button onClick={() => setTitle(1)}> 글제목1</button>
-      <button onClick={() => setTitle(2)}> 글제목2</button>
+      <button onClick={() => setTitle(2)}> 글제목2</button> */}
+      <input
+        onChange={(e) => {
+          입력값변경(e.target.value);
+          console.log(입력값);
+        }}
+      />
+      <button
+        onClick={() => {
+          let copy = [...글제목];
+          copy.unshift(입력값);
+          Change(copy);
+        }}
+      >
+        글발행
+      </button>
       {
         // 조건식 ? 참일때 실행할코드 : 거짓일 때 실행할 코드
         modal == true ? (
